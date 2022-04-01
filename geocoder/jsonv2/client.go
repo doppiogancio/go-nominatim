@@ -24,7 +24,8 @@ func New(baseUrl string) *Client {
 }
 
 func (c *Client) Search(req shared.SearchRequest) ([]*Place, error) {
-	url := fmt.Sprintf("%s/search.php?q=%s&format=%s&accept-language=%s",
+	url := fmt.Sprintf(
+		"%s/search.php?q=%s&format=%s&accept-language=%s",
 		c.baseUrl,
 		req.Q,
 		format,
@@ -52,4 +53,36 @@ func (c *Client) Search(req shared.SearchRequest) ([]*Place, error) {
 	}
 
 	return list, nil
+}
+
+func (c *Client) Reverse(latitude, longitude string) (*ReversePlace, error) {
+	url := fmt.Sprintf(
+		"%s/reverse?format=%s&lat=%s&lon=%s",
+		c.baseUrl,
+		format,
+		latitude,
+		longitude,
+	)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	var place *ReversePlace
+
+	err = json.Unmarshal(body, &place)
+	if err != nil {
+		return nil, err
+	}
+
+	if place == nil {
+		return nil, errors.New("address not found")
+	}
+
+	return place, nil
 }

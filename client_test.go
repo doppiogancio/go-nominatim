@@ -21,6 +21,20 @@ func Test_JsonV2_Search(t *testing.T) {
 	fmt.Println(places[0].Lon)
 }
 
+func Test_JsonV2_Reverse(t *testing.T) {
+	client := NewJsonV2()
+
+	place, err := client.Reverse(
+		"40.8358846",
+		"14.2487679",
+	)
+
+	assert.Nil(t, err)
+	fmt.Println(place.Name)
+	fmt.Println(place.DisplayName)
+	fmt.Println(place.Address)
+}
+
 func Test_GeoJson_Search(t *testing.T) {
 	client := NewGeoJson()
 
