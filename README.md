@@ -1,131 +1,64 @@
 # Go Nominatim
-A GO client for Nominatim API
+A GO client for Nominatim API to perform both geocoding and reverse geocoding requests. No **api key** is needed.
 
-## Example
-### Json v2
-#### Request
+## Geocoding example
+Converting the address "**Piazza del Plebiscito, Napoli**" in to a geographic coordinate with latitude and longitute.
 ```
-client := NewJsonV2()
+package main
 
-places, err := client.Search(shared.SearchRequest{
-    Q:              "Piazza del Plebiscito, Napoli",
-    AcceptLanguage: "it",
-})
+import nominatim "github.com/doppiogancio/go-nominatim"
+
+func main() {
+    coordinates, err := nominatim.Geocode("Piazza del Plebiscito, Napoli")    
+}
 
 ```
 
-#### Response
+Where the location will look like:
 ```
-Place struct {
-    PlaceId     int `json:"place_id"`
-    Licence     string
-    OsmType     string `json:"osm_type"`
-    OsmId       int    `json:"osm_id"`
-    Lat         string
-    Lon         string
-    DisplayName string `json:"display_name"`
-    PlaceRank   int    `json:"place_rank"`
-    Category    string
-    Type        string
-    Importance  float64
-    Icon        string
+{
+    Latitude: 40.835855949999996,
+    Longitude: 14.248565182098474,
 }
 ```
 
-### Geo Json
-#### Request
+## Reverse geocoding example
+Reversing the geographic coordinate **(40.835855949999996, 14.248565182098474)** in to the address "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia".
 ```
-client := NewGeoJson()
+package main
 
-collection, err := client.Search(shared.SearchRequest{
-    Q:              "Piazza del Plebiscito, Napoli",
-    AcceptLanguage: "it",
-})
-```
+import nominatim "github.com/doppiogancio/go-nominatim"
 
-#### Response
-```
-Properties struct {
-    PlaceID     int    `json:"place_id"`
-    OsmType     string `json:"osm_type"`
-    OsmID       int    `json:"osm_id"`
-    DisplayName string `json:"display_name"`
-    PlaceRank   int    `json:"place_rank"`
-    Category    string
-    Type        string
-    Importance  float64
-    Icon        string
+func main() {
+    address, err := geocoder.ReverseGeocode(
+        40.835855949999996,
+        14.248565182098474,
+        "it",
+    )    
 }
 
-Geometry struct {
-    Type        string
-    Coordinates []float64
-}
+```
 
-Feature struct {
-    Type       string
-    Properties Properties
-    Bbox       []float64
-    Geometry   Geometry
-}
-
-FeatureCollection struct {
-    Type     string
-    Licence  string
-    Features []Feature
+Where the address will look like:
+```
+{
+  "DisplayName": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
+  "Road": "Via Cesario Console",
+  "Suburb": "San Ferdinando",
+  "City": "Napoli",
+  "County": "Napoli",
+  "State": "Campania",
+  "Postcode": "80132",
+  "Country": "Italia",
+  "CountryCode": "it"
 }
 ```
 
-### Geocode Json
-#### Request
-```
-client := NewGeocodeJson()
-
-collection, err := client.Search(shared.SearchRequest{
-    Q:              "Piazza del Plebiscito, Napoli",
-    AcceptLanguage: "it",
-})
-```
-
-#### Response
-```
-GeocodingProperties struct {
-    PlaceID int    `json:"place_id"`
-    OsmType string `json:"osm_type"`
-    OsmID   int    `json:"osm_id"`
-    Type    string `json:"type"`
-    Label   string `json:"label"`
-    Name    string `json:"name"`
-}
-
-Properties struct {
-    Geocoding GeocodingProperties
-}
-
-Geometry struct {
-    Type        string
-    Coordinates []float64
-}
-
-Feature struct {
-    Type       string
-    Properties Properties
-    Geometry   Geometry
-}
-
-Geocoding struct {
-    Version     string
-    Attribution string
-    Licence     string
-    Query       string
-}
-
-FeatureCollection struct {
-    Type      string
-    Geocoding Geocoding
-    Features  []Feature
-}
-```
+## Nominatim API clients
+If you prefer, you can use directly one of the 3 client to use the nominatim API.
+1. **jsonv2** [README](geocoder/jsonv2/README.md)
+2. **geojson** [README](geocoder/geojson/README.md)
+3. **geocodejson** [README](geocoder/geocodejson/README.md)
 
 
 ## API documentation
