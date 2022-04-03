@@ -53,3 +53,45 @@ func (c *Client) Search(req shared.SearchRequest) (*FeatureCollection, error) {
 
 	return collection, nil
 }
+
+func (c *Client) Reverse(req shared.ReverseGeocodeRequest) (*FeatureCollection, error) {
+	url := fmt.Sprintf(
+		"%s/reverse?format=%s&lat=%f&lon=%f&accept-language=%s",
+		c.baseUrl,
+		format,
+		req.Latitude,
+		req.Longitude,
+		req.AcceptLanguage,
+	)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	var errResponse struct {
+		Error string
+	}
+
+	err = json.Unmarshal(body, &errResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	if errResponse.Error != "" {
+		return nil, errors.New(errResponse.Error)
+	}
+
+	var collection *FeatureCollection
+
+	err = json.Unmarshal(body, &collection)
+	if err != nil {
+		return nil, err
+	}
+
+	return collection, nil
+}

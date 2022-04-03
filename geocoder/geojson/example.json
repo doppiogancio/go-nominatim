@@ -1,0 +1,46 @@
+{
+  "type": "FeatureCollection",
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "place_id": 107822711,
+        "osm_type": "way",
+        "osm_id": 27182911,
+        "place_rank": 30,
+        "category": "tourism",
+        "type": "attraction",
+        "importance": 0.36786576807458427,
+
+        "addresstype": "tourism",
+        "name": "Piazza del Plebiscito",
+        "display_name": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Nápoles, Campania, 80132, Italia",
+        "address": {
+          "tourism": "Piazza del Plebiscito",
+          "road": "Via Cesario Console",
+          "suburb": "San Ferdinando",
+          "city": "Napoli",
+          "county": "Nápoles",
+          "state": "Campania",
+          "postcode": "80132",
+          "country": "Italia",
+          "country_code": "it"
+        }
+      },
+      "bbox": [
+        14.2474705,
+        40.8350116,
+        14.2498375,
+        40.83674
+      ],
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.248565182098474,
+          40.835855949999996
+        ]
+      }
+    }
+  ]
+}

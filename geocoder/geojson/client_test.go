@@ -1,4 +1,4 @@
-package geocodejson
+package geojson
 
 import (
 	"fmt"
@@ -18,8 +18,7 @@ func TestClient_Search(t *testing.T) {
 
 	feature := collection.Features[0]
 	assert.Equal(t, "Feature", feature.Type)
-	assert.Equal(t, "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia", feature.Properties.Geocoding.Label)
-	assert.Equal(t, "Piazza del Plebiscito", feature.Properties.Geocoding.Name)
+	assert.Equal(t, "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia", feature.Properties.DisplayName)
 }
 
 func TestClient_Reverse(t *testing.T) {
@@ -34,6 +33,6 @@ func TestClient_Reverse(t *testing.T) {
 	assert.Equal(
 		t,
 		"Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
-		collection.Features[0].Properties.Geocoding.Label,
+		collection.Features[0].Properties.DisplayName,
 	)
 }
