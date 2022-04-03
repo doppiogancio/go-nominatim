@@ -55,13 +55,14 @@ func (c *Client) Search(req shared.SearchRequest) ([]*Place, error) {
 	return list, nil
 }
 
-func (c *Client) Reverse(latitude, longitude string) (*ReversePlace, error) {
+func (c *Client) Reverse(req shared.ReverseGeocodeRequest) (*ReversePlace, error) {
 	url := fmt.Sprintf(
-		"%s/reverse?format=%s&lat=%s&lon=%s",
+		"%s/reverse?format=%s&lat=%f&lon=%f&accept-language=%s",
 		c.baseUrl,
 		format,
-		latitude,
-		longitude,
+		req.Latitude,
+		req.Longitude,
+		req.AcceptLanguage,
 	)
 
 	resp, err := http.Get(url)
@@ -72,6 +73,19 @@ func (c *Client) Reverse(latitude, longitude string) (*ReversePlace, error) {
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
+
+	var errResponse struct {
+		Error string
+	}
+
+	err = json.Unmarshal(body, &errResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	if errResponse.Error != "" {
+		return nil, errors.New(errResponse.Error)
+	}
 
 	var place *ReversePlace
 
