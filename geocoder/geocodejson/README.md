@@ -1,7 +1,12 @@
 # Geocode JSON Client
-...
 
 ## Search Request
+The code below will submit a request like:
+```
+https://nominatim.openstreetmap.org/search.php?q=Piazza del Plebiscito, Napoli&format=geocodejson
+```
+
+An example:
 ```
 package main
 
@@ -16,7 +21,7 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    places, err := geocoder.NewJsonV2().Search(request)
+    places, err := geocoder.NewGeocodeJson().Search(request)
 }
 ```
 
@@ -24,22 +29,34 @@ Where each place will look like:
 
 ```
 {
-    PlaceID: 107822711,
-    Licence: "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
-    OsmType: "way",
-    OsmID: 27182911,
-    Lat: "40.835855949999996",
-    Lon: "14.248565182098474",
-    DisplayName: "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
-    PlaceRank: 30,
-    Category: "tourism",
-    Type: "attraction",
-    Importance: 0.7778657680745842,
-    Icon: "https://nominatim.openstreetmap.org/ui/mapicons//poi_point_of_interest.p.20.png"
+  "Type": "Feature",
+  "Properties": {
+    "Geocoding": {
+      "PlaceID": 107822711,
+      "OsmType": "way",
+      "OsmID": 27182911,
+      "Type": "attraction",
+      "Label": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
+      "Name": "Piazza del Plebiscito"
+    }
+  },
+  "Geometry": {
+    "Type": "Point",
+    "Coordinates": [
+      14.248565182098474,
+      40.835855949999996
+    ]
+  }
 }
 ```
 
 ## Reverse Request
+The code below will submit a request like:
+```
+https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=40.835855949999996&lon=14.248565182098474
+```
+
+An example:
 ```
 package main
 
@@ -55,37 +72,11 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    place, err := geocoder.NewJsonV2().Reverse(request)
+    place, err := geocoder.NewGeocodeJson().Reverse(request)
 }
 ```
 
 Where the place will look like:
 ```
-{
-  "PlaceID": 107822711,
-  "Licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
-  "OsmType": "way",
-  "OsmID": 27182911,
-  "Lat": "40.835855949999996",
-  "Lon": "14.248565182098474",
-  "DisplayName": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
-  "PlaceRank": 30,
-  "Category": "tourism",
-  "Type": "attraction",
-  "Importance": 0.36786576807458427,
-  "Icon": "",
-  "addresstype": "tourism",
-  "Name": "Piazza del Plebiscito",
-  "Address": {
-    "Tourism": "Piazza del Plebiscito",
-    "Road": "Via Cesario Console",
-    "Suburb": "San Ferdinando",
-    "City": "Napoli",
-    "County": "Napoli",
-    "State": "Campania",
-    "Postcode": "80132",
-    "Country": "Italia",
-    "country_code": "it"
-  }
-}
+not yet implemented
 ```
