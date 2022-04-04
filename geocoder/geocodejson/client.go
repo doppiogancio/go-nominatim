@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/doppiogancio/go-nominatim/geocoder"
 	"github.com/doppiogancio/go-nominatim/shared"
 	"io/ioutil"
 	"net/http"
@@ -17,9 +18,9 @@ type (
 
 const format = "geocodejson"
 
-func New(baseUrl string) *Client {
+func New() *Client {
 	return &Client{
-		baseUrl: baseUrl,
+		baseUrl: geocoder.BaseUrl,
 	}
 }
 

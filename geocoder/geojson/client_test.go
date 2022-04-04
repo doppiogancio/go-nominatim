@@ -7,7 +7,7 @@ import (
 )
 
 func TestClient_Search(t *testing.T) {
-	client := New("https://nominatim.openstreetmap.org")
+	client := New()
 	collection, err := client.Search(shared.SearchRequest{
 		Q:              "Piazza del Plebiscito, Napoli",
 		AcceptLanguage: "it",
@@ -21,7 +21,7 @@ func TestClient_Search(t *testing.T) {
 }
 
 func TestClient_Reverse(t *testing.T) {
-	client := New("https://nominatim.openstreetmap.org")
+	client := New()
 	collection, err := client.Reverse(shared.ReverseGeocodeRequest{
 		Latitude:       40.835855949999996,
 		Longitude:      14.248565182098474,
