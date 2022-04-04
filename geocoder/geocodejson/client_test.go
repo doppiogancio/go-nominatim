@@ -1,8 +1,6 @@
 package geocodejson
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/doppiogancio/go-nominatim/shared"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -31,9 +29,6 @@ func TestClient_Reverse(t *testing.T) {
 	})
 
 	assert.Nil(t, err)
-
-	b, _ := json.Marshal(collection.Features[0].Properties.Geocoding)
-	fmt.Println(string(b))
 
 	geocoding := collection.Features[0].Properties.Geocoding
 	expectedGeocoding := GeocodingProperties{
