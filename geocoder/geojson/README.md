@@ -85,5 +85,44 @@ func main() {
 
 Where the place will look like:
 ```
-not yet implemented
+{
+  "Type": "Feature",
+  "Properties": {
+    "PlaceID": 107822711,
+    "OsmType": "way",
+    "OsmID": 27182911,
+    "DisplayName": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
+    "PlaceRank": 30,
+    "Category": "tourism",
+    "Type": "attraction",
+    "Importance": 0.36786576807458427,
+    "Icon": null,
+    "Addresstype": "tourism",
+    "Name": "Piazza del Plebiscito",
+    "Address": {
+      "Tourism": "Piazza del Plebiscito",
+      "Road": "Via Cesario Console",
+      "Suburb": "San Ferdinando",
+      "City": "Napoli",
+      "County": "Napoli",
+      "State": "Campania",
+      "Postcode": "80132",
+      "Country": "Italia",
+      "country_code": "it"
+    }
+  },
+  "Bbox": [
+    14.2474705,
+    40.8350116,
+    14.2498375,
+    40.83674
+  ],
+  "Geometry": {
+    "Type": "Point",
+    "Coordinates": [
+      14.248565182098474,
+      40.835855949999996
+    ]
+  }
+}
 ```

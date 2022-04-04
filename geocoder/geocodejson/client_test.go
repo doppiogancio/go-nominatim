@@ -1,6 +1,7 @@
 package geocodejson
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/doppiogancio/go-nominatim/shared"
 	"github.com/stretchr/testify/assert"
@@ -30,10 +31,19 @@ func TestClient_Reverse(t *testing.T) {
 	})
 
 	assert.Nil(t, err)
-	fmt.Println(collection)
-	assert.Equal(
-		t,
-		"Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
-		collection.Features[0].Properties.Geocoding.Label,
-	)
+
+	b, _ := json.Marshal(collection.Features[0].Properties.Geocoding)
+	fmt.Println(string(b))
+
+	geocoding := collection.Features[0].Properties.Geocoding
+	expectedGeocoding := GeocodingProperties{
+		PlaceID: 107822711,
+		OsmType: "way",
+		OsmID:   27182911,
+		Type:    "attraction",
+		Label:   "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
+		Name:    "Piazza del Plebiscito",
+	}
+
+	assert.Equal(t, expectedGeocoding, geocoding)
 }
