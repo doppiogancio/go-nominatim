@@ -76,7 +76,14 @@ func main() {
 }
 ```
 
-Where the place will look like:
+Where the Feature.Properties.Geocoding will look like:
 ```
-not yet implemented
+{
+  "PlaceID": 107822711,
+  "OsmType": "way",
+  "OsmID": 27182911,
+  "Type": "attraction",
+  "Label": "Piazza del Plebiscito, Via Cesario Console, San Ferdinando, Municipalità 1, Napoli, Campania, 80132, Italia",
+  "Name": "Piazza del Plebiscito"
+}
 ```
