@@ -2,31 +2,13 @@ package go_nominatim
 
 import (
 	"errors"
-	"github.com/doppiogancio/go-nominatim/geocoder/geocodejson"
-	"github.com/doppiogancio/go-nominatim/geocoder/geojson"
 	"github.com/doppiogancio/go-nominatim/geocoder/jsonv2"
 	"github.com/doppiogancio/go-nominatim/shared"
 	"strconv"
 )
 
-const (
-	baseUrl = "https://nominatim.openstreetmap.org"
-)
-
-func NewJsonV2() *jsonv2.Client {
-	return jsonv2.New(baseUrl)
-}
-
-func NewGeoJson() *geojson.Client {
-	return geojson.New(baseUrl)
-}
-
-func NewGeocodeJson() *geocodejson.Client {
-	return geocodejson.New(baseUrl)
-}
-
 func Geocode(address string) (*shared.Coordinate, error) {
-	locations, err := NewJsonV2().Search(shared.SearchRequest{
+	locations, err := jsonv2.New().Search(shared.SearchRequest{
 		Q: address,
 	})
 	if err != nil {
@@ -55,7 +37,7 @@ func Geocode(address string) (*shared.Coordinate, error) {
 }
 
 func ReverseGeocode(latitude, longitude float64, language string) (*shared.Address, error) {
-	place, err := NewJsonV2().Reverse(shared.ReverseGeocodeRequest{
+	place, err := jsonv2.New().Reverse(shared.ReverseGeocodeRequest{
 		Latitude:       latitude,
 		Longitude:      longitude,
 		AcceptLanguage: language,

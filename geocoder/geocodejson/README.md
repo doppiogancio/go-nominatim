@@ -10,8 +10,8 @@ An example:
 ```
 package main
 
-import (
-    geocoder "github.com/doppiogancio/go-nominatim"
+import (   
+    geocoder "github.com/doppiogancio/go-nominatim/geocoder/jsonv2"
     "github.com/doppiogancio/go-nominatim/shared"
 )
 
@@ -21,7 +21,7 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    places, err := geocoder.NewGeocodeJson().Search(request)
+    places, err := geocoder.New().Search(request)
 }
 ```
 
@@ -61,7 +61,7 @@ An example:
 package main
 
 import (
-    geocoder "github.com/doppiogancio/go-nominatim"
+    geocoder "github.com/doppiogancio/go-nominatim/geocoder/jsonv2"
     "github.com/doppiogancio/go-nominatim/shared"
 )
 
@@ -72,7 +72,7 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    place, err := geocoder.NewGeocodeJson().Reverse(request)
+    place, err := geocoder.New().Reverse(request)
 }
 ```
 

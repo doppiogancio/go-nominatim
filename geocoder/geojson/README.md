@@ -11,7 +11,7 @@ An example:
 package main
 
 import (
-    geocoder "github.com/doppiogancio/go-nominatim"
+    geocoder "github.com/doppiogancio/go-nominatim/geocoder/geojson"
     "github.com/doppiogancio/go-nominatim/shared"
 )
 
@@ -21,7 +21,7 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    collection, err := geocoder.NewGeoJson().Search(request)
+    collection, err := geocoder.New().Search(request)
 }
 ```
 
@@ -68,7 +68,7 @@ An example:
 package main
 
 import (
-    geocoder "github.com/doppiogancio/go-nominatim"
+    geocoder "github.com/doppiogancio/go-nominatim/geocoder/geojson"
     "github.com/doppiogancio/go-nominatim/shared"
 )
 
@@ -79,7 +79,7 @@ func main() {
         AcceptLanguage: "it",
     }
 
-    place, err := geocoder.NewGeoJson().Reverse(request)
+    place, err := geocoder.New().Reverse(request)
 }
 ```
 
